@@ -1,10 +1,10 @@
 import { GoogleGenAI } from '@google/genai';
 import { promises as fs } from 'fs';
+import fetch from 'node-fetch';
 import pdf from 'pdf-parse';
 import dotenv from "dotenv";
 dotenv.config();
-
-console.log('Google AI API Key:', process.env.GOOGLE_AI_API_KEY);
+// Initialize Google GenAI client
 
 const genAI = new GoogleGenAI({apiKey: process.env.GOOGLE_AI_API_KEY});
 // genAI.models.list().then(models => {
@@ -16,23 +16,38 @@ const genAI = new GoogleGenAI({apiKey: process.env.GOOGLE_AI_API_KEY});
  * - PDF file buffer (Buffer) or file path (string).
  * @returns {Promise<string>} - Extracted text.
  */
+
+
+//const extractResumeText = async (source) => { try { let fileBuffer; // If source is a string, read the file asynchronously if (typeof source === 'string') { fileBuffer = await fs.readFile(source); } // If source is already a Buffer, use it directly else if (Buffer.isBuffer(source)) { fileBuffer = source; } else { throw new Error('Invalid source type: must be file path or Buffer'); } // Parse the PDF const data = await pdf(fileBuffer); return data.text; } catch (err) { console.error('Error parsing PDF:', err.message); throw err; } };
+
+
+
+
+
+
+
 const extractResumeText = async (source) => { 
   try {
     let fileBuffer;
 
-    // If source is a string, read the file asynchronously
     if (typeof source === 'string') {
-      fileBuffer = await fs.readFile(source);
+      if (source.startsWith('http')) {
+        // Fetch PDF from Cloudinary or any URL
+        const res = await fetch(source);
+        if (!res.ok) throw new Error(`Failed to fetch PDF: ${res.statusText}`);
+        fileBuffer = Buffer.from(await res.arrayBuffer());
+      } else {
+        // Local file path
+        fileBuffer = await fs.readFile(source);
+      }
     } 
-    // If source is already a Buffer, use it directly
     else if (Buffer.isBuffer(source)) {
       fileBuffer = source;
     } 
     else {
-      throw new Error('Invalid source type: must be file path or Buffer');
+      throw new Error('Invalid source type: must be file path, URL, or Buffer');
     }
 
-    // Parse the PDF
     const data = await pdf(fileBuffer);
     return data.text;
   } catch (err) { 
@@ -40,7 +55,6 @@ const extractResumeText = async (source) => {
     throw err;
   }
 };
-
 
 // Analyze resume and extract skills, experience, and generate ATS score
 const analyzeResume = async (resumeText, jobDescription = null) => {

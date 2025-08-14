@@ -1,34 +1,34 @@
 import multer from 'multer';
 import path from 'path';
-import fs from 'fs';
-import { fileURLToPath } from 'url';
-import { log } from 'console';
+import { CloudinaryStorage } from 'multer-storage-cloudinary';
+import cloudinary from '../config/cloudinary.js';
+// import fs from 'fs';
+// import { fileURLToPath } from 'url';
+// import { log } from 'console';
 
 // ES module equivalent of __dirname
-const __filename = fileURLToPath(import.meta.url);
-console.log(`Current file: ${__filename}`);
+// const __filename = fileURLToPath(import.meta.url);
+// console.log(`Current file: ${__filename}`);
 
-const __dirname = path.dirname(__filename);
-console.log(`Current directory: ${__dirname}`);
-// Ensure uploads directory exists
-const uploadsDir = path.join(__dirname, '../uploads');
-console.log(`Uploads directory: ${uploadsDir}`);
+// const __dirname = path.dirname(__filename);
+// console.log(`Current directory: ${__dirname}`);
+// // Ensure uploads directory exists
+// const uploadsDir = path.join(__dirname, '../uploads');
+// console.log(`Uploads directory: ${uploadsDir}`);
 
-if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir, { recursive: true });
-}
+// if (!fs.existsSync(uploadsDir)) {
+//   fs.mkdirSync(uploadsDir, { recursive: true });
+// }
 
 // Configure storage
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, uploadsDir);
-  },
-  filename: (req, file, cb) => {
-    // Create unique filename with timestamp
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    const ext = path.extname(file.originalname);
-    cb(null, `resume-${uniqueSuffix}${ext}`);
-  }
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: async (req, file) => ({
+    folder: 'uploads',
+    resource_type: 'raw', // IMPORTANT for PDFs/DOCs
+    allowed_formats: ['pdf', 'doc', 'docx'],
+    public_id: `resume-${Date.now()}`
+  }),
 });
 
 // File filter function
