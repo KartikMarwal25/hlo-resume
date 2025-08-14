@@ -37,7 +37,7 @@ const CompanyRecommendations = () => {
 
   const fetchIndustries = async () => {
     try {
-      const response = await axios.get('/api/company/industries');
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/company/industries`);
       setIndustries(response.data.industries);
     } catch (error) {
       console.error('Error fetching industries:', error);
@@ -70,7 +70,7 @@ const CompanyRecommendations = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post('/api/company/match', {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/company/match`, {
         skills: formData.skills.filter(skill => skill.trim()),
         experienceLevel: formData.experienceLevel,
         industry: formData.industry

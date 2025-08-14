@@ -64,7 +64,7 @@ export const AuthProvider = ({ children }) => {
     const loadUser = async () => {
       if (state.token) {
         try {
-          const res = await axios.get('/api/auth/me');
+          const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/auth/me`);
           dispatch({
             type: 'LOGIN_SUCCESS',
             payload: { user: res.data.user, token: state.token },
@@ -84,7 +84,7 @@ export const AuthProvider = ({ children }) => {
   const register = async (userData) => {
     try {
       dispatch({ type: 'SET_LOADING', payload: true });
-      const res = await axios.post('/api/auth/register', userData);
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/register`, userData);
       
       dispatch({
         type: 'LOGIN_SUCCESS',
@@ -105,7 +105,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (credentials) => {
     try {
       dispatch({ type: 'SET_LOADING', payload: true });
-      const res = await axios.post('/api/auth/login', credentials);
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, credentials);
       
       dispatch({
         type: 'LOGIN_SUCCESS',
@@ -131,7 +131,7 @@ export const AuthProvider = ({ children }) => {
   // Update user profile
   const updateProfile = async (profileData) => {
     try {
-      const res = await axios.put('/api/auth/profile', profileData);
+      const res = await axios.put(`${process.env.REACT_APP_API_URL}/api/auth/profile`, profileData);
       dispatch({
         type: 'UPDATE_USER',
         payload: res.data.user,

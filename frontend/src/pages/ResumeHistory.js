@@ -30,7 +30,7 @@ const ResumeHistory = () => {
   const fetchResumes = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`/api/resume/history?page=${currentPage}&sortBy=${sortBy}&sortOrder=${sortOrder}&limit=10`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/resume/history?page=${currentPage}&sortBy=${sortBy}&sortOrder=${sortOrder}&limit=10`);
       setResumes(response.data.resumes);
       setTotalPages(response.data.pagination.totalPages);
     } catch (error) {
@@ -47,7 +47,7 @@ const ResumeHistory = () => {
     }
 
     try {
-      await axios.delete(`/api/resume/${resumeId}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/resume/${resumeId}`);
       toast.success('Resume deleted successfully');
       fetchResumes();
     } catch (error) {
@@ -58,7 +58,7 @@ const ResumeHistory = () => {
 
   const handleDownload = async (resumeId, fileName) => {
     try {
-      const response = await axios.get(`/api/resume/${resumeId}/download`, {
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/resume/${resumeId}/download`, {
         responseType: 'blob'
       });
       

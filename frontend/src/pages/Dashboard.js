@@ -33,7 +33,7 @@ const Dashboard = () => {
 
   const fetchResumes = async () => {
     try {
-      const response = await axios.get(`/api/resume/history?limit=5`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/resume/history?limit=5`);
       setResumes(response.data.resumes);
     } catch (error) {
       console.error('Error fetching resumes:', error);
@@ -73,7 +73,7 @@ const Dashboard = () => {
     }
 
     try {
-      const response = await axios.post('/api/resume/upload', formData, {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/resume/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

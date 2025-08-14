@@ -29,7 +29,7 @@ const InterviewPrep = () => {
 
   const fetchResumes = async () => {
     try {
-      const response = await axios.get('/api/resume/history');
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/resume/history`);
       setResumes(response.data.resumes);
     } catch (error) {
       console.error('Error fetching resumes:', error);
@@ -45,7 +45,7 @@ const InterviewPrep = () => {
 
     setGenerating(true);
     try {
-      const response = await axios.post('/api/resume/analyze', {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/resume/analyze`, {
         resumeId: selectedResume,
         jobDescription: jobDescription
       });
