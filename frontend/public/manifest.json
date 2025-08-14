@@ -1,0 +1,14 @@
+{
+  "short_name": "Resume AI",
+  "name": "Resume AI - Smart Resume Analysis & Interview Prep",
+  "description": "AI-powered platform to help job seekers improve their resumes, get ATS compatibility scores, and receive personalized interview preparation",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#3b82f6",
+  "background_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "categories": ["productivity", "business", "education"],
+  "lang": "en",
+  "dir": "ltr"
+}

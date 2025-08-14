@@ -1,0 +1,42 @@
+{
+  "name": "resume-ai-backend",
+  "version": "1.0.0",
+  "description": "Backend API for Resume AI application",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@google/genai": "^1.13.0",
+    "@google/generative-ai": "^0.2.1",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.5",
+    "express-validator": "^7.0.1",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.0.3",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "path": "^0.12.7",
+    "pdf-parse": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/express-rate-limit": "^5.1.3",
+    "nodemon": "^3.0.2"
+  },
+  "keywords": [
+    "resume",
+    "ai",
+    "api",
+    "express",
+    "mongodb"
+  ],
+  "author": "Resume AI Team",
+  "license": "MIT"
+}
