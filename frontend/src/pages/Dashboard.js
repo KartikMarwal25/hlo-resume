@@ -15,7 +15,9 @@ import {
   AlertCircle,
   Download,
   Trash2
+  //eslint-disable-next-line
 } from 'lucide-react';
+ 
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -31,7 +33,7 @@ const Dashboard = () => {
 
   const fetchResumes = async () => {
     try {
-      const response = await axios.get('/api/resume/history?limit=5');
+      const response = await axios.get(`/api/resume/history?limit=5`);
       setResumes(response.data.resumes);
     } catch (error) {
       console.error('Error fetching resumes:', error);
