@@ -32,7 +32,7 @@ const PORT = process.env.PORT || 5000;
 app.use(helmet());
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? ['https://hlo-resume-rmn8-9kfykzrks-kartik-marwals-projects.vercel.app'] 
+    ? ['https://hlo-resume-rmn8.vercel.app/'] 
     : ['http://localhost:3000'],
   credentials: true
 }));
