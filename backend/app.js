@@ -32,7 +32,7 @@ const PORT = process.env.PORT || 5000;
 app.use(helmet());
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? ['https://your-domain.com'] 
+    ? ['https://hlo-resume-rmn8-9kfykzrks-kartik-marwals-projects.vercel.app'] 
     : ['http://localhost:3000'],
   credentials: true
 }));
@@ -85,10 +85,10 @@ app.use('*', (req, res) => {
 mongoose.connect(process.env.MONGODB_URI)
 .then(() => {
   console.log('Connected to MongoDB');
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-    console.log(`Environment: ${process.env.NODE_ENV}`);
-  });
+  // app.listen(PORT, () => {
+  //   console.log(`Server running on port ${PORT}`);
+  //   console.log(`Environment: ${process.env.NODE_ENV}`);
+  // });
 })
 .catch((error) => {
   console.error('MongoDB connection error:', error);
