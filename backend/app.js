@@ -31,9 +31,10 @@ const PORT = process.env.PORT || 5000;
 // Security middleware
 app.use(helmet());
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://hlo-resume-rmn8.vercel.app'] 
-    : ['http://localhost:3000'],
+  origin: true,
+  // process.env.NODE_ENV === 'production' 
+  //   ? ['https://hlo-resume-rmn8.vercel.app'] 
+  //   : ['http://localhost:3000'],
   credentials: true
 }));
 
